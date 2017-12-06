@@ -1,12 +1,13 @@
 from django import http
 from django.conf import settings
 from django.utils.timezone import now
+from django.utils.deprecation import MiddlewareMixin
 
 from .models import Redirect, Referral
 from . import settings as redirect_settings
 
 
-class AdvancedRedirectMiddleware(object):
+class AdvancedRedirectMiddleware(MiddlewareMixin):
     """
     This middleware checks to see if the current request has resulted in a 404 error, and if it has
     it then checks to see if there is a redirect specified.  If there is none, it will store the url that
